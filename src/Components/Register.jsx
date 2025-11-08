@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../firebase/FirebaseAuthProvider";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
@@ -95,6 +95,12 @@ const Register = () => {
             <FcGoogle size={24} /> Sign In With Google
           </button>
         </form>
+        <p className="text-center py-3">
+          Alredy Have An Account{" "}
+          <Link to="/login" className="text-blue-600 underline">
+            Login
+          </Link>
+        </p>
       </div>
     </div>
   );

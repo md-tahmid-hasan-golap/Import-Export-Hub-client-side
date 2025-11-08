@@ -44,37 +44,42 @@ const Navbar = () => {
           All Products
         </NavLink>
       </li>
-      <li className="font-bold">
-        <NavLink
-          to="/myExports"
-          className={({ isActive }) =>
-            isActive ? "btn bg-blue-600 text-white mr-2" : "btn mr-2"
-          }
-        >
-          My Exports
-        </NavLink>
-      </li>
-      <li className="font-bold">
-        <NavLink
-          to="/myImports"
-          className={({ isActive }) =>
-            isActive ? "btn bg-blue-600 text-white mr-2" : "btn mr-2"
-          }
-        >
-          My Imports
-        </NavLink>
-      </li>
-      <li className="font-bold">
-        <NavLink
-          to="/addExport"
-          className={({ isActive }) =>
-            isActive ? "btn bg-blue-600 text-white mr-2" : "btn mr-2"
-          }
-        >
+      {user && (
+        <>
           {" "}
-          Add Export
-        </NavLink>
-      </li>
+          <li className="font-bold">
+            <NavLink
+              to="/myExports"
+              className={({ isActive }) =>
+                isActive ? "btn bg-blue-600 text-white mr-2" : "btn mr-2"
+              }
+            >
+              My Exports
+            </NavLink>
+          </li>
+          <li className="font-bold">
+            <NavLink
+              to="/myImports"
+              className={({ isActive }) =>
+                isActive ? "btn bg-blue-600 text-white mr-2" : "btn mr-2"
+              }
+            >
+              My Imports
+            </NavLink>
+          </li>
+          <li className="font-bold">
+            <NavLink
+              to="/addExport"
+              className={({ isActive }) =>
+                isActive ? "btn bg-blue-600 text-white mr-2" : "btn mr-2"
+              }
+            >
+              {" "}
+              Add Export
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   return (
