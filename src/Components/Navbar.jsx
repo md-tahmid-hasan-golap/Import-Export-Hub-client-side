@@ -75,7 +75,7 @@ const Navbar = () => {
               }
             >
               {" "}
-              Add Export
+              Add Products
             </NavLink>
           </li>
         </>

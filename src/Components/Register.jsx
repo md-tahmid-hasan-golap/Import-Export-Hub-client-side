@@ -6,8 +6,8 @@ import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
   const { creatUser, signInWithGoogle } = useContext(AuthContext);
-
   const navigate = useNavigate();
+
   const handleRegister = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -15,20 +15,42 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    // console.log(name, photoURL, email, password);
+    // Password Validation
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasMinLength = password.length >= 6;
+
+    if (!hasUpperCase || !hasLowerCase || !hasNumber || !hasMinLength) {
+      Swal.fire({
+        title: "Password Invalid!",
+        html: "Password must contain:<br>- At least 1 uppercase letter<br>- At least 1 lowercase letter<br>- At least 1 number<br>- Minimum 6 characters",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+      return; // Stop further execution
+    }
+
+    // Firebase Registration
     creatUser(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
         Swal.fire({
-          title: "Register SuccessFully!",
+          title: "Registered Successfully!",
           icon: "success",
-          draggable: true,
           timer: 1500,
+          showConfirmButton: false,
         });
         navigate("/");
       })
       .catch((error) => {
+        Swal.fire({
+          title: "Registration Failed!",
+          text: error.message,
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
         console.log(error);
       });
   };
@@ -46,6 +68,7 @@ const Register = () => {
       })
       .catch((error) => console.log(error));
   };
+
   return (
     <div className="card bg-base-100 w-full max-w-sm mx-auto my-7 shadow-2xl">
       <div className="card-body">
@@ -91,12 +114,17 @@ const Register = () => {
             Register
           </button>
 
-          <button onClick={handelSignInWithGoogle} className="btn btn-outline">
+          <button
+            type="button"
+            onClick={handelSignInWithGoogle}
+            className="btn btn-outline flex items-center justify-center gap-2"
+          >
             <FcGoogle size={24} /> Sign In With Google
           </button>
         </form>
+
         <p className="text-center py-3">
-          Alredy Have An Account{" "}
+          Already Have An Account?{" "}
           <Link to="/login" className="text-blue-600 underline">
             Login
           </Link>
