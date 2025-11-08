@@ -1,16 +1,37 @@
-# React + Vite
+# Import Export Hub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Description
 
-Currently, two official plugins are available:
+**Import Export Hub** is a modern web platform where users can manage their exports, browse global products, and import any product into their personal "My Imports" section with a single click.  
+The website features a clean UI, real-time sync, and secure user data management.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Links:**
 
-## React Compiler
+- Live Demo: [https://<YOUR-LIVE-SITE-LINK>.com](https://<YOUR-LIVE-SITE-LINK>.com)
+- GitHub Repository: [https://github.com/<YOUR-GITHUB-USERNAME>/import-export-hub](https://github.com/<YOUR-GITHUB-USERNAME>/import-export-hub)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Responsive Home Page:** Banner/slider and latest 6 products display
+- **Authentication:** Email/Password login & Google login support
+- **Product Details Page:** Shows full product info and "Import Now" modal
+- **All Products Page:** 3-column grid with search functionality
+- **My Imports:** Track imported products with Remove & See Details
+- **Add Export/Product:** Authenticated users can add new products
+- **My Exports:** View, update, and delete user-added products
+- **Private Routes:** Ensure secure access for authenticated users
+- **UI & Design:** Consistent typography, responsive layout, uniform card sizes
+- **Dark/Light Mode Toggle:** User-friendly interface for different viewing modes
+- **Dynamic Page Titles:** Each page shows appropriate title
+
+---
+
+## Technologies Used
+
+- **Frontend:** React.js (v19.1.1), React Router (v7.9.5), React Icons (v5.5.0)
+- **Styling:** Tailwind CSS (v4.1.17), @tailwindcss/vite (v4.1.17)
+- **Carousel/Slider:** react-slick (v0.31.0), slick-carousel (v1.8.1)
+- **Authentication & Database:** Firebase (v12.5.0)
+- **Alerts/Notifications:** SweetAlert2 (v11.26.3)
