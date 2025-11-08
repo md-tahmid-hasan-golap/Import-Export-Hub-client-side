@@ -1,7 +1,27 @@
-import React from "react";
-import { Link, NavLink } from "react-router";
+import React, { useContext } from "react";
+import { Link, NavLink, useNavigate } from "react-router";
+import { AuthContext } from "../firebase/FirebaseAuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handelLogout = () => {
+    logOut()
+      .then((result) => {
+        console.log(result);
+        Swal.fire({
+          title: "Logout Successfully!",
+          icon: "success",
+          draggable: true,
+          timer: 1500,
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const links = (
     <>
       <li className="font-bold">
@@ -91,12 +111,33 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end gap-3">
-        <Link to="/login" className="btn">
-          Login
-        </Link>
-        <Link to="/register" className="btn">
-          Register
-        </Link>
+        {user ? (
+          <div className="navbar-end gap-3">
+            <img
+              className="border-2 border-green-600 w-12 h-12 rounded-full"
+              src={user.photoURL}
+              title={user.displayName}
+              alt=""
+            />
+
+            <button
+              onClick={handelLogout}
+              className="btn bg-red-600 text-white"
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
+          <div className="navbar-end gap-3">
+            {" "}
+            <Link to="/login" className="btn">
+              Login
+            </Link>
+            <Link to="/register" className="btn">
+              Register
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

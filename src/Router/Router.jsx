@@ -6,6 +6,8 @@ import AllProducts from "../Components/AllProducts";
 import MyExports from "../Components/MyExports";
 import MyImports from "../Components/MyImports";
 import AddExport from "../Components/AddExport";
+import Login from "../Components/Login";
+import Register from "../Components/Register";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ const router = createBrowserRouter([
       {
         path: "/addExport",
         element: <AddExport></AddExport>,
+      },
+      {
+        path: "/login",
+        Component: Login,
+      },
+      {
+        path: "/register",
+        Component: Register,
       },
     ],
   },
