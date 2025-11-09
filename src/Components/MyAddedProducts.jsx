@@ -91,9 +91,12 @@ const MyAddedProducts = ({ products, index }) => {
         >
           <FaEye /> View
         </Link>
-        <button className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-yellow-400 text-white rounded hover:bg-yellow-500 transition">
+        <Link
+          to={`/updateProducts/${_id}`}
+          className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-yellow-400 text-white rounded hover:bg-yellow-500 transition"
+        >
           <FaPen /> Update
-        </button>
+        </Link>
         <button
           onClick={() => handelDelete(_id)}
           className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
