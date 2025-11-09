@@ -48,7 +48,7 @@ const MyExports = () => {
             key={product._id}
             products={product}
             index={index}
-            onDelete={handleLocalDelete} // ✅ এখানে দিলাম
+            onDelete={handleLocalDelete}
           />
         ))}
       </div>

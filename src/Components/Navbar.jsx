@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
 import { AuthContext } from "../firebase/FirebaseAuthProvider";
 import Swal from "sweetalert2";
+import logo from "../../src/assets/photo-1726828537956-61ae115d7d7a.avif";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -110,26 +111,16 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <h2
-          className="
-    text-2xl      
-    sm:text-3xl  
-    md:text-4xl   
-    lg:text-3xl  
-    font-extrabold
-    mb-6
-    text-center
-    bg-gradient-to-r
-    from-purple-500
-    via-pink-500
-    to-red-500
-    bg-clip-text
-    text-transparent
-    mt-3
-  "
-        >
-          Import Export Hub
-        </h2>
+        <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+          <img
+            src={logo}
+            alt="logo"
+            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-12 lg:h-12 rounded-lg"
+          />
+          <h2 className="text-lg sm:text-xl md:text-xl lg:text-2xl font-extrabold text-center sm:text-left bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
+            Import Export Hub
+          </h2>
+        </div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>

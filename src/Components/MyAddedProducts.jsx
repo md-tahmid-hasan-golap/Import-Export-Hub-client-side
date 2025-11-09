@@ -32,7 +32,6 @@ const MyAddedProducts = ({ products, index, onDelete }) => {
           .delete(`http://localhost:5000/products-delete/${_id}`)
           .then((res) => {
             if (res.data.deletedCount) {
-              // ✅ Delete Successful → UI থেকেও Remove করো
               onDelete(_id);
 
               Swal.fire({
