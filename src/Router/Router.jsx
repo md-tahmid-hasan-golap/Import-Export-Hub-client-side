@@ -8,6 +8,7 @@ import MyImports from "../Components/MyImports";
 import AddExport from "../Components/AddExport";
 import Login from "../Components/Login";
 import Register from "../Components/Register";
+import ProductDetails from "../Components/ProductDetails";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home></Home>,
+        loader: () => fetch("http://localhost:5000/letestProduct"),
       },
       {
         path: "/allProducts",
@@ -34,6 +36,12 @@ const router = createBrowserRouter([
       {
         path: "/addExport",
         element: <AddExport></AddExport>,
+      },
+      {
+        path: "productDetails/:id",
+        element: <ProductDetails></ProductDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/products-details/${params.id}`),
       },
       {
         path: "/login",
