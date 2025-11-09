@@ -1,5 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { FaEye, FaPen, FaTrash } from "react-icons/fa";
+import { Link } from "react-router";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -11,7 +15,38 @@ const cardVariants = {
 };
 
 const MyAddedProducts = ({ products, index }) => {
-  const { image, name, price, origin, rating, quantity } = products;
+  const { _id, image, name, price, origin, rating, quantity } = products;
+
+  const handelDelete = (_id) => {
+    console.log(_id);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:5000/products-delete/${_id}`)
+          .then((res) => {
+            if (res.data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    });
+  };
 
   return (
     <motion.div
@@ -43,10 +78,29 @@ const MyAddedProducts = ({ products, index }) => {
       <p className="text-gray-700 mb-1">
         <span className="font-semibold text-green-500">Rating:</span> {rating}
       </p>
-      <p className="text-gray-700 mb-1">
+      <p className="text-gray-700 mb-4">
         <span className="font-semibold text-blue-500">Available Quantity:</span>{" "}
         {quantity}
       </p>
+
+      {/* Buttons */}
+      <div className="flex gap-3 mt-auto">
+        <Link
+          to={`/productDetails/${_id}`}
+          className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white rounded hover:from-pink-500 hover:to-purple-500 transition"
+        >
+          <FaEye /> View
+        </Link>
+        <button className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-yellow-400 text-white rounded hover:bg-yellow-500 transition">
+          <FaPen /> Update
+        </button>
+        <button
+          onClick={() => handelDelete(_id)}
+          className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+        >
+          <FaTrash /> Delete
+        </button>
+      </div>
     </motion.div>
   );
 };

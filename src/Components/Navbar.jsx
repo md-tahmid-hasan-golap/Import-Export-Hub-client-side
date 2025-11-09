@@ -54,7 +54,7 @@ const Navbar = () => {
                 isActive ? "btn bg-blue-600 text-white mr-2" : "btn mr-2"
               }
             >
-              My Exports
+              My Products
             </NavLink>
           </li>
           <li className="font-bold">
