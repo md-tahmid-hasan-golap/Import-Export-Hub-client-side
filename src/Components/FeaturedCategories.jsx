@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const categories = [
   {
@@ -33,29 +32,28 @@ const FeaturedCategories = () => {
     <section className="max-w-7xl mx-auto px-4 py-12">
       <h2
         className="
-    text-3xl 
-    md:text-4xl 
-    lg:text-5xl 
-    font-bold 
-    mb-8 
-    text-center 
-    bg-gradient-to-r 
-    from-purple-500 
-    via-pink-500 
-    to-red-500 
-    bg-clip-text 
-    text-transparent
-  "
+          text-3xl 
+          md:text-4xl 
+          lg:text-5xl 
+          font-bold 
+          mb-8 
+          text-center 
+          bg-gradient-to-r 
+          from-purple-500 
+          via-pink-500 
+          to-red-500 
+          bg-clip-text 
+          text-transparent
+        "
       >
         Featured Categories
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         {categories.map((cat) => (
-          <Link
+          <div
             key={cat.id}
-            to={`/products?category=${cat.name}`}
-            className="border rounded-lg overflow-hidden shadow hover:shadow-lg transition"
+            className="border rounded-lg overflow-hidden shadow hover:shadow-lg transition cursor-default"
           >
             <img
               src={cat.image}
@@ -63,7 +61,7 @@ const FeaturedCategories = () => {
               className="w-full h-40 object-cover"
             />
             <div className="p-4 text-center font-semibold">{cat.name}</div>
-          </Link>
+          </div>
         ))}
       </div>
     </section>
