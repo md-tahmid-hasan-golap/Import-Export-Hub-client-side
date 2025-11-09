@@ -23,10 +23,6 @@ const ProductDetails = () => {
   const handleImport = () => {
     if (importQty <= 0 || importQty > quantity) return;
 
-    // Backend call placeholder
-    // axios.post("/imports", { productId: product._id, quantity: importQty, userEmail: currentUser.email })
-    // .then(res => {...})
-
     Swal.fire({
       title: "Imported Successfully!",
       text: `You imported ${importQty} of ${name}`,
@@ -93,20 +89,11 @@ const ProductDetails = () => {
           </div>
 
           {/* Import Now Section */}
-          <div className="flex flex-col sm:flex-row gap-4 mt-4">
-            <input
-              type="number"
-              min="1"
-              max={quantity}
-              value={importQty}
-              onChange={(e) => setImportQty(Number(e.target.value))}
-              placeholder="Enter quantity"
-              className="input input-bordered w-full sm:w-1/2"
-            />
+          <div className="flex justify-center mt-4">
             <button
               onClick={handleImport}
               disabled={importQty <= 0 || importQty > quantity}
-              className={`btn w-full sm:w-1/2 text-white font-semibold ${
+              className={`w-full sm:w-1/2 py-3 text-white font-semibold rounded-lg transition-all duration-300 shadow-md ${
                 importQty > 0 && importQty <= quantity
                   ? "bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-pink-500 hover:to-purple-500"
                   : "bg-gray-400 cursor-not-allowed"
