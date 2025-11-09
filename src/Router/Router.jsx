@@ -9,6 +9,7 @@ import AddExport from "../Components/AddExport";
 import Login from "../Components/Login";
 import Register from "../Components/Register";
 import ProductDetails from "../Components/ProductDetails";
+import PrivateRouter from "./PrivateRouter";
 
 const router = createBrowserRouter([
   {
@@ -28,19 +29,35 @@ const router = createBrowserRouter([
       },
       {
         path: "/myExports",
-        element: <MyExports></MyExports>,
+        element: (
+          <PrivateRouter>
+            <MyExports></MyExports>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/myImports",
-        element: <MyImports></MyImports>,
+        element: (
+          <PrivateRouter>
+            <MyImports></MyImports>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/addExport",
-        element: <AddExport></AddExport>,
+        element: (
+          <PrivateRouter>
+            <AddExport></AddExport>
+          </PrivateRouter>
+        ),
       },
       {
         path: "productDetails/:id",
-        element: <ProductDetails></ProductDetails>,
+        element: (
+          <PrivateRouter>
+            <ProductDetails></ProductDetails>
+          </PrivateRouter>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/products-details/${params.id}`),
       },

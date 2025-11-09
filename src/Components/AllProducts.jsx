@@ -6,7 +6,7 @@ const AllProducts = () => {
   const allData = useLoaderData();
   // console.log(allData);
   return (
-    <div>
+    <div className="mb-5">
       <h2
         className="
         my-7
