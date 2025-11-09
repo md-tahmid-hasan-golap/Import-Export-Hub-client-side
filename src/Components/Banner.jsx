@@ -67,7 +67,7 @@ const Banner = () => {
 
                 {/* Content */}
                 <div className="relative z-10 max-w-full sm:max-w-lg">
-                  <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 md:mb-4 drop-shadow-lg">
+                  <h2 className="text-5xl font-bold mb-8 text-center text-gradient bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
                     {title}
                   </h2>
                   <p className="mb-4 sm:mb-6 text-sm sm:text-base md:text-lg drop-shadow-lg">
