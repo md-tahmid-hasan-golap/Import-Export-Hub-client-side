@@ -110,7 +110,24 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <h2 className="text-3xl font-bold mb-8 text-center text-gradient bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
+        <h2
+          className="
+    text-2xl      
+    sm:text-3xl  
+    md:text-4xl   
+    lg:text-3xl  
+    font-extrabold
+    mb-6
+    text-center
+    bg-gradient-to-r
+    from-purple-500
+    via-pink-500
+    to-red-500
+    bg-clip-text
+    text-transparent
+    mt-3
+  "
+        >
           Import Export Hub
         </h2>
       </div>

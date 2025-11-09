@@ -31,9 +31,25 @@ const categories = [
 const FeaturedCategories = () => {
   return (
     <section className="max-w-7xl mx-auto px-4 py-12">
-      <h2 className="text-3xl font-bold mb-8 text-center text-gradient bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
+      <h2
+        className="
+    text-3xl 
+    md:text-4xl 
+    lg:text-5xl 
+    font-bold 
+    mb-8 
+    text-center 
+    bg-gradient-to-r 
+    from-purple-500 
+    via-pink-500 
+    to-red-500 
+    bg-clip-text 
+    text-transparent
+  "
+      >
         Featured Categories
       </h2>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         {categories.map((cat) => (
           <Link

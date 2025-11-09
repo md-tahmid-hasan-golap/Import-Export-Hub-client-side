@@ -36,9 +36,25 @@ const Testimonials = () => {
   return (
     <section className="bg-base-200 py-12 mb-7 rounded-lg">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-8 text-center text-gradient bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
+        <h2
+          className="
+  text-3xl 
+  md:text-4xl 
+  lg:text-5xl 
+  font-bold 
+  mb-8 
+  text-center 
+  bg-gradient-to-r 
+  from-purple-500 
+  via-pink-500 
+  to-red-500 
+  bg-clip-text 
+  text-transparent
+"
+        >
           What Our Users Say
         </h2>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((testi, index) => (
             <motion.div
