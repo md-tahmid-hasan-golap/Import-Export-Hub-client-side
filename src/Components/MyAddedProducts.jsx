@@ -14,15 +14,13 @@ const cardVariants = {
   }),
 };
 
-const MyAddedProducts = ({ products, index }) => {
+const MyAddedProducts = ({ products, index, onDelete }) => {
   const { _id, image, name, price, origin, rating, quantity } = products;
 
   const handelDelete = (_id) => {
-    console.log(_id);
-
     Swal.fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: "This action cannot be undone!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -34,16 +32,17 @@ const MyAddedProducts = ({ products, index }) => {
           .delete(`http://localhost:5000/products-delete/${_id}`)
           .then((res) => {
             if (res.data.deletedCount) {
+              // ✅ Delete Successful → UI থেকেও Remove করো
+              onDelete(_id);
+
               Swal.fire({
                 title: "Deleted!",
-                text: "Your file has been deleted.",
+                text: "Product removed successfully.",
                 icon: "success",
               });
             }
           })
-          .catch((error) => {
-            console.log(error);
-          });
+          .catch((error) => console.log(error));
       }
     });
   };
@@ -57,14 +56,12 @@ const MyAddedProducts = ({ products, index }) => {
       viewport={{ once: true, amount: 0.2 }}
       variants={cardVariants}
     >
-      {/* Product Image */}
       <img
         src={image}
         alt={name}
         className="w-full h-48 object-cover rounded mb-4"
       />
 
-      {/* Product Info */}
       <h3 className="text-2xl md:text-3xl font-bold mb-2 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
         {name}
       </h3>
@@ -83,7 +80,6 @@ const MyAddedProducts = ({ products, index }) => {
         {quantity}
       </p>
 
-      {/* Buttons */}
       <div className="flex gap-3 mt-auto">
         <Link
           to={`/productDetails/${_id}`}
@@ -91,12 +87,14 @@ const MyAddedProducts = ({ products, index }) => {
         >
           <FaEye /> View
         </Link>
+
         <Link
           to={`/updateProducts/${_id}`}
           className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-yellow-400 text-white rounded hover:bg-yellow-500 transition"
         >
           <FaPen /> Update
         </Link>
+
         <button
           onClick={() => handelDelete(_id)}
           className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"

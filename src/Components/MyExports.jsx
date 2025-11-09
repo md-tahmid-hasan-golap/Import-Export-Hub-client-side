@@ -5,6 +5,7 @@ import MyAddedProducts from "./MyAddedProducts";
 const MyExports = () => {
   const { user } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
     fetch(`http://localhost:5000/myProducts/${user.email}`)
       .then((res) => res.json())
@@ -12,33 +13,43 @@ const MyExports = () => {
         setProducts(data);
       });
   }, [user.email]);
+
+  // ✅ UI থেকে রিমুভ করার জন্য function
+  const handleLocalDelete = (id) => {
+    setProducts((prevProducts) =>
+      prevProducts.filter((item) => item._id !== id)
+    );
+  };
+
   return (
     <div className="mt-7">
       <h2
         className="
-    text-3xl 
-    md:text-4xl 
-    lg:text-5xl 
-    font-bold 
-    mb-8 
-    text-center 
-    bg-gradient-to-r 
-    from-purple-500 
-    via-pink-500 
-    to-red-500 
-    bg-clip-text 
-    text-transparent
-    
-  "
+        text-3xl 
+        md:text-4xl 
+        lg:text-5xl 
+        font-bold 
+        mb-8 
+        text-center 
+        bg-gradient-to-r 
+        from-purple-500 
+        via-pink-500 
+        to-red-500 
+        bg-clip-text 
+        text-transparent
+        "
       >
         My Added Products
       </h2>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {products.map((products) => (
+        {products.map((product, index) => (
           <MyAddedProducts
-            key={products._id}
-            products={products}
-          ></MyAddedProducts>
+            key={product._id}
+            products={product}
+            index={index}
+            onDelete={handleLocalDelete} // ✅ এখানে দিলাম
+          />
         ))}
       </div>
     </div>
