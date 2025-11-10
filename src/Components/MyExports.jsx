@@ -14,7 +14,6 @@ const MyExports = () => {
       });
   }, [user.email]);
 
-  // ✅ UI থেকে রিমুভ করার জন্য function
   const handleLocalDelete = (id) => {
     setProducts((prevProducts) =>
       prevProducts.filter((item) => item._id !== id)
@@ -22,7 +21,7 @@ const MyExports = () => {
   };
 
   return (
-    <div className="mt-7">
+    <div className="mt-7 mb-5">
       <h2
         className="
         text-3xl 
