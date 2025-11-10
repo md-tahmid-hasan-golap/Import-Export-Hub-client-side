@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
 import { AuthContext } from "../firebase/FirebaseAuthProvider";
 import Swal from "sweetalert2";
@@ -7,6 +7,12 @@ import logo from "../../src/assets/photo-1726828537956-61ae115d7d7a.avif";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
   const handelLogout = () => {
     logOut()
       .then((result) => {
@@ -23,6 +29,12 @@ const Navbar = () => {
         console.log(error);
       });
   };
+
+  const handleTheme = (checked) => {
+    setTheme(checked ? "dark" : "light");
+    localStorage.setItem("theme", checked ? "dark" : "light");
+  };
+
   const links = (
     <>
       <li className="font-bold">
@@ -81,6 +93,12 @@ const Navbar = () => {
           </li>
         </>
       )}
+      <input
+        onChange={(e) => handleTheme(e.target.checked)}
+        type="checkbox"
+        defaultChecked={localStorage.getItem("theme") === "dark"}
+        className="toggle mt-2 ml-7"
+      />
     </>
   );
   return (
