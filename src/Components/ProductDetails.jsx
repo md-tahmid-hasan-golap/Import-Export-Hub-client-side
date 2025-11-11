@@ -1,41 +1,59 @@
-import React, { useState } from "react";
-import { Link, useLoaderData } from "react-router";
+import { Link, useLoaderData, useNavigate } from "react-router";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
+import { useContext } from "react";
+import { AuthContext } from "../firebase/FirebaseAuthProvider";
+import axios from "axios";
 
 const ProductDetails = () => {
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const product = useLoaderData();
-  const {
-    image,
-    name,
-    price,
-    origin,
-    rating,
-    quantity,
-    createdAt,
-    email,
-    userName,
-  } = product;
 
-  const [importQty, setImportQty] = useState(0);
+  const { _id, image, name, price, origin, rating, quantity } = product;
 
   const handleImport = () => {
-    if (importQty <= 0 || importQty > quantity) return;
+    if (!user) {
+      return navigate("/login");
+    }
 
-    Swal.fire({
-      title: "Imported Successfully!",
-      text: `You imported ${importQty} of ${name}`,
-      icon: "success",
-      confirmButtonColor: "#8b5cf6", // gradient match color
-    });
+    const importedProduct = {
+      productId: _id,
+      image,
+      name,
+      price,
+      origin,
+      rating,
+      email: user.email,
+      userName: user.displayName,
+    };
 
-    setImportQty(0);
+    axios
+      .post("http://localhost:5000/imports", importedProduct)
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            title: "Imported Successfully!",
+            text: `${name} is added to your imports.`,
+            icon: "success",
+            confirmButtonColor: "#8b5cf6",
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          title: "Something went wrong!",
+          text: "Try again later.",
+          icon: "error",
+          confirmButtonColor: "#ef4444",
+        });
+      });
   };
 
   return (
     <div className="max-w-5xl mx-auto my-10 px-4">
-      {/* Back Button */}
       <motion.div
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
@@ -49,55 +67,44 @@ const ProductDetails = () => {
         </Link>
       </motion.div>
 
-      {/* Product Card */}
       <motion.div
         className="bg-white rounded-lg shadow-lg p-6 md:flex gap-6"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        {/* Product Image */}
         <img
           src={image}
           alt={name}
           className="w-full md:w-1/2 h-80 object-cover rounded mb-4 md:mb-0"
         />
 
-        {/* Product Info */}
         <div className="md:w-1/2 flex flex-col justify-between">
           <div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-center md:text-left bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
               {name}
             </h2>
             <p className="text-gray-700 mb-2">
-              <span className="font-semibold text-purple-500">Price:</span> $
+              <span className="text-purple-600 font-semibold">Price:</span> $
               {price}
             </p>
             <p className="text-gray-700 mb-2">
-              <span className="font-semibold text-pink-500">Origin:</span>{" "}
+              <span className="text-pink-600 font-semibold">Origin:</span>{" "}
               {origin}
             </p>
             <p className="text-gray-700 mb-2">
-              <span className="font-semibold text-green-500">Rating:</span>{" "}
+              <span className="text-green-600 font-semibold">Rating:</span>{" "}
               {rating}
             </p>
-            <p className="text-gray-700 mb-4">
-              <span className="font-semibold text-blue-500">
-                Available Quantity:
-              </span>{" "}
+            <p className="text-gray-700">
+              <span className="text-blue-600 font-semibold">Available:</span>{" "}
               {quantity}
             </p>
           </div>
 
-          {/* Import Now Section */}
-          <div className="flex justify-center mt-4">
+          <div className="flex justify-center mt-6">
             <button
               onClick={handleImport}
-              disabled={importQty <= 0 || importQty > quantity}
-              className={`w-full sm:w-1/2 py-3 text-white font-semibold rounded-lg transition-all duration-300 shadow-md ${
-                importQty > 0 && importQty <= quantity
-                  ? "bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-pink-500 hover:to-purple-500"
-                  : "bg-gray-400 cursor-not-allowed"
-              }`}
+              className="w-full sm:w-1/2 py-3 text-white font-semibold rounded-lg transition-all duration-300 shadow-md bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-pink-500 hover:to-purple-500"
             >
               Import Now
             </button>
