@@ -135,7 +135,7 @@ const Navbar = () => {
             alt="logo"
             className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-12 lg:h-12 rounded-lg"
           />
-          <h2 className="text-lg sm:text-xl md:text-xl lg:text-xl font-extrabold text-center sm:text-left bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
+          <h2 className="text-lg sm:text-xl md:text-xl hidden md:flex lg:text-xl font-extrabold text-center sm:text-left bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
             Import Export Hub
           </h2>
         </div>
