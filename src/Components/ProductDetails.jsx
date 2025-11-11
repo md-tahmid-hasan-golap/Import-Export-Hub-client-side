@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router";
+import { Link, useLoaderData, useNavigate } from "react-router";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
@@ -10,6 +10,7 @@ const ProductDetails = () => {
   const { user } = useContext(AuthContext);
   const product = useLoaderData();
 
+  const navigate = useNavigate();
   const { _id, image, name, price, origin, rating, quantity } = product;
 
   const handleImport = () => {
@@ -34,6 +35,7 @@ const ProductDetails = () => {
             icon: "success",
             confirmButtonColor: "#8b5cf6",
           });
+          navigate("/myImports");
         }
       })
       .catch((error) => {

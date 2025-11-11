@@ -18,7 +18,7 @@ const MyImports = () => {
     }
   }, [user, loaderData]);
 
-  const handeldelete = (_id) => {
+  const handleDelete = (_id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "This action cannot be undone!",
@@ -33,10 +33,7 @@ const MyImports = () => {
           .delete(`http://localhost:5000/import-delete/${_id}`)
           .then((res) => {
             if (res.data.deletedCount) {
-              setImports((prevImports) =>
-                prevImports.filter((item) => item._id !== _id)
-              );
-
+              setImports((prev) => prev.filter((item) => item._id !== _id));
               Swal.fire({
                 title: "Deleted!",
                 text: "Product removed successfully.",
@@ -44,74 +41,58 @@ const MyImports = () => {
               });
             }
           })
-          .catch((error) => console.log(error));
+          .catch(() => {
+            Swal.fire({
+              title: "Failed!",
+              text: "Could not delete the item.",
+              icon: "error",
+            });
+          });
       }
     });
   };
 
   return (
     <div className="max-w-7xl mx-auto my-10 px-4">
-      <h2
-        className="
-        text-2xl 
-        sm:text-3xl 
-        md:text-4xl 
-        lg:text-5xl 
-        font-bold 
-        mb-8 
-        text-center 
-        bg-gradient-to-r 
-        from-purple-500 
-        via-pink-500 
-        to-red-500 
-        bg-clip-text 
-        text-transparent
-        "
-      >
+      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 text-center bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
         My Imports
       </h2>
 
       {imports.length === 0 ? (
-        <p className="text-center text-gray-500 text-lg">
+        <p className="text-center text-gray-600 dark:text-gray-300 text-lg">
           You have no imported products yet.
         </p>
       ) : (
-        <div className="overflow-x-auto shadow-lg rounded-lg">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white">
+        <div className="overflow-x-auto shadow-lg rounded-lg border border-gray-200 dark:border-gray-700">
+          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead className="bg-gray-100 dark:bg-gray-800">
               <tr>
-                <th className="py-3 px-2 sm:px-4 text-left text-xs sm:text-sm">
-                  Image
-                </th>
-                <th className="py-3 px-2 sm:px-4 text-left text-xs sm:text-sm">
-                  Name
-                </th>
-                <th className="py-3 px-2 sm:px-4 text-left text-xs sm:text-sm">
-                  Price
-                </th>
-                <th className="py-3 px-2 sm:px-4 text-left text-xs sm:text-sm">
-                  Rating
-                </th>
-                <th className="py-3 px-2 sm:px-4 text-left text-xs sm:text-sm">
-                  Origin
-                </th>
-                <th className="py-3 px-2 sm:px-4 text-left text-xs sm:text-sm">
-                  Quantity
-                </th>
-                <th className="py-3 px-2 sm:px-4 text-left text-xs sm:text-sm">
-                  Remove
-                </th>
-                <th className="py-3 px-2 sm:px-4 text-left text-xs sm:text-sm">
-                  Details
-                </th>
+                {[
+                  "Image",
+                  "Name",
+                  "Price",
+                  "Rating",
+                  "Origin",
+                  "Quantity",
+                  "Remove",
+                  "Details",
+                ].map((header) => (
+                  <th
+                    key={header}
+                    className="py-3 px-2 sm:px-4 text-left text-xs sm:text-sm text-gray-700 dark:text-gray-200"
+                  >
+                    {header}
+                  </th>
+                ))}
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
               {imports.map((item) => (
                 <tr
                   key={item._id}
-                  className="hover:bg-purple-50 transition duration-200"
+                  className="hover:bg-purple-50 dark:hover:bg-gray-700 transition duration-200"
                 >
+                  {/* Image */}
                   <td className="py-2 px-2 sm:px-4">
                     <img
                       src={item.image}
@@ -119,29 +100,43 @@ const MyImports = () => {
                       className="h-12 sm:h-16 w-12 sm:w-16 object-cover rounded-lg shadow-sm"
                     />
                   </td>
-                  <td className="py-2 px-2 sm:px-4 font-medium text-sm sm:text-base">
+
+                  {/* Name */}
+                  <td className="py-2 px-2 sm:px-4 font-medium text-sm sm:text-base text-gray-800 dark:text-gray-100">
                     {item.name}
                   </td>
-                  <td className="py-2 px-2 sm:px-4 text-gray-700 text-sm sm:text-base">
+
+                  {/* Price */}
+                  <td className="py-2 px-2 sm:px-4 text-gray-700 dark:text-gray-300 text-sm sm:text-base">
                     ${item.price}
                   </td>
+
+                  {/* Rating */}
                   <td className="py-2 px-2 sm:px-4 text-yellow-500 font-semibold text-sm sm:text-base">
                     {item.rating} ⭐
                   </td>
-                  <td className="py-2 px-2 sm:px-4 text-sm sm:text-base">
-                    {item.origin}
+
+                  {/* Origin */}
+                  <td className="py-2 px-2 sm:px-4 text-gray-700 dark:text-gray-300 text-sm sm:text-base">
+                    {item.origin || "Unknown"}
                   </td>
-                  <td className="py-2 px-2 sm:px-4 font-semibold text-sm sm:text-base">
-                    {item.importedQty}
+
+                  {/* Quantity */}
+                  <td className="py-2 px-2 sm:px-4 text-gray-700 dark:text-gray-300 text-sm sm:text-base">
+                    {item.quantity || ""}
                   </td>
+
+                  {/* Remove Button */}
                   <td className="py-2 px-2 sm:px-4">
                     <button
-                      onClick={() => handeldelete(item._id)}
+                      onClick={() => handleDelete(item._id)}
                       className="py-1 px-2 sm:px-3 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition text-xs sm:text-sm"
                     >
                       Remove
                     </button>
                   </td>
+
+                  {/* Details Button */}
                   <td className="py-2 px-2 sm:px-4">
                     <Link
                       to={`/productDetails/${item.productId}`}
