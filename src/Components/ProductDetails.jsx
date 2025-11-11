@@ -1,4 +1,4 @@
-import { Link, useLoaderData, useNavigate } from "react-router";
+import { Link, useLoaderData } from "react-router";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
@@ -8,16 +8,11 @@ import axios from "axios";
 
 const ProductDetails = () => {
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
   const product = useLoaderData();
 
   const { _id, image, name, price, origin, rating, quantity } = product;
 
   const handleImport = () => {
-    if (!user) {
-      return navigate("/login");
-    }
-
     const importedProduct = {
       productId: _id,
       image,

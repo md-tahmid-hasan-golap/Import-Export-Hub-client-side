@@ -43,6 +43,7 @@ const router = createBrowserRouter([
             <MyImports></MyImports>
           </PrivateRouter>
         ),
+        loader: () => fetch("http://localhost:5000/myImports"),
       },
       {
         path: "/addExport",
