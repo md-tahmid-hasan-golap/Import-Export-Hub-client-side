@@ -16,7 +16,10 @@ const UpdateProducts = () => {
     const data = Object.fromEntries(formData);
 
     axios
-      .put(`http://localhost:5000/updateProducts/${_id}`, data)
+      .put(
+        `https://import-export-hub-server-side.vercel.app/updateProducts/${_id}`,
+        data
+      )
       .then((res) => {
         if (res.data.modifiedCount) {
           Swal.fire({

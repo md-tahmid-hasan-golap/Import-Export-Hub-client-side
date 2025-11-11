@@ -7,7 +7,7 @@ The website features a clean UI, real-time sync, and secure user data management
 
 **Links:**
 
-- Live Demo: [https://<YOUR-LIVE-SITE-LINK>.com](https://<YOUR-LIVE-SITE-LINK>.com)
+- Live Demo: [https://<YOUR-LIVE-SITE-LINK>.com](https://import-export-2d0aa.web.app/)
 - GitHub server Side Repository: [https://github.com/md-tahmid-hasan-golap/Import-Export-Hub-Server-side](https://github.com/md-tahmid-hasan-golap/Import-Export-Hub-Server-side)
 
 ---

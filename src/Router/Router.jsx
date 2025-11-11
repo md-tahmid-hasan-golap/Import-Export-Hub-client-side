@@ -21,12 +21,16 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home></Home>,
-        loader: () => fetch("http://localhost:5000/letestProduct"),
+        loader: () =>
+          fetch(
+            "https://import-export-hub-server-side.vercel.app/letestProduct"
+          ),
       },
       {
         path: "/allProducts",
         element: <AllProducts></AllProducts>,
-        loader: () => fetch("http://localhost:5000/allProducts"),
+        loader: () =>
+          fetch("https://import-export-hub-server-side.vercel.app/allProducts"),
       },
       {
         path: "/myExports",
@@ -43,7 +47,8 @@ const router = createBrowserRouter([
             <MyImports></MyImports>
           </PrivateRouter>
         ),
-        loader: () => fetch("http://localhost:5000/myImports"),
+        loader: () =>
+          fetch("https://import-export-hub-server-side.vercel.app/myImports"),
       },
       {
         path: "/addExport",
@@ -61,7 +66,9 @@ const router = createBrowserRouter([
           </PrivateRouter>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/products-details/${params.id}`),
+          fetch(
+            `https://import-export-hub-server-side.vercel.app/products-details/${params.id}`
+          ),
       },
       {
         path: "updateProducts/:id",
@@ -71,7 +78,9 @@ const router = createBrowserRouter([
           </PrivateRouter>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/products-details/${params.id}`),
+          fetch(
+            `https://import-export-hub-server-side.vercel.app/products-details/${params.id}`
+          ),
       },
       {
         path: "/login",

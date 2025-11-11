@@ -20,7 +20,7 @@ const AddExport = () => {
     // console.log(data);
 
     axios
-      .post("http://localhost:5000/products", data)
+      .post("https://import-export-hub-server-side.vercel.app/products", data)
       .then((res) => {
         if (res.data.insertedId) {
           Swal.fire({

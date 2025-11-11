@@ -30,7 +30,9 @@ const MyImports = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/import-delete/${_id}`)
+          .delete(
+            `https://import-export-hub-server-side.vercel.app/import-delete/${_id}`
+          )
           .then((res) => {
             if (res.data.deletedCount) {
               setImports((prev) => prev.filter((item) => item._id !== _id));

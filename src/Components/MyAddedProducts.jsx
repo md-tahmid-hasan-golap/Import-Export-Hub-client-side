@@ -29,7 +29,9 @@ const MyAddedProducts = ({ products, index, onDelete }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/products-delete/${_id}`)
+          .delete(
+            `https://import-export-hub-server-side.vercel.app/products-delete/${_id}`
+          )
           .then((res) => {
             if (res.data.deletedCount) {
               onDelete(_id);

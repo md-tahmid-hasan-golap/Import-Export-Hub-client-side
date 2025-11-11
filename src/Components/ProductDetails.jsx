@@ -26,7 +26,10 @@ const ProductDetails = () => {
     };
 
     axios
-      .post("http://localhost:5000/imports", importedProduct)
+      .post(
+        "https://import-export-hub-server-side.vercel.app/imports",
+        importedProduct
+      )
       .then((res) => {
         if (res.data.insertedId) {
           Swal.fire({

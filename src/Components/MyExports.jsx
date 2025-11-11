@@ -7,7 +7,9 @@ const MyExports = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myProducts/${user.email}`)
+    fetch(
+      `https://import-export-hub-server-side.vercel.app/myProducts/${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
